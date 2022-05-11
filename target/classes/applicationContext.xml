@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+  <bean id="serverImpl" class="cn.mjl.service.springAop.ServiceImpl"/>
+  <bean id="logAdvice" class="cn.mjl.service.springAop.LogAdvice"/>
+  <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <property name="interfaces" value="cn.mjl.service.springAop.Service"/>
+    <property name="interceptorNames">
+      <list>
+        <value>logAdvice</value>
+      </list>
+    </property>
+    <property name="target" ref="serverImpl"/>
+  </bean>
+  <!--  <bean id="user" class="cn.mjl.pojo.User"/>-->
+  <!--  <bean id="userService" class="cn.mjl.service.impl.UserServiceImpl">-->
+  <!--    <constructor-arg index="0" ref="userMapper"/>-->
+  <!--  </bean>-->
+  <!--  <bean id="userController" class="cn.mjl.controller.UserController">-->
+  <!--    <property name="userService" ref="userService"/>-->
+  <!--  </bean>-->
+</beans>
